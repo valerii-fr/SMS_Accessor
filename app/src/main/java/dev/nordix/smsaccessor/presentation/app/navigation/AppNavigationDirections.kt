@@ -10,7 +10,7 @@ sealed interface AppNavigationDirections {
     }
 
     @ComposeDestination
-    interface SmsList {
+    interface Logs {
         val selectedContactId: String
         companion object
     }

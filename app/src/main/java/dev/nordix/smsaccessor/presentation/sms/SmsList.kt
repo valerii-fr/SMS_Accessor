@@ -42,16 +42,12 @@ fun SmsList(
     viewModel: SmsListViewModel = smsListViewModel(phoneNumber),
 ) {
 
-    LaunchedEffect(phoneNumber) {
-        viewModel.setNumber(phoneNumber)
-    }
-
     val smsList by viewModel.smsList.collectAsState()
     val listState = rememberLazyListState()
 
     LazyColumn(
         modifier = modifier,
-        contentPadding = PaddingValues(4.dp),
+        contentPadding = PaddingValues(8.dp),
         state = listState
     ) {
         items(
@@ -65,8 +61,6 @@ fun SmsList(
     }
 
 }
-
-
 
 @Composable
 private fun LazyItemScope.SmsListItem(

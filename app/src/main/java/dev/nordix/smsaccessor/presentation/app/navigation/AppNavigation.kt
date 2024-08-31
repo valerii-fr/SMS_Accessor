@@ -2,14 +2,18 @@ package dev.nordix.smsaccessor.presentation.app.navigation
 
 import android.os.Bundle
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import dev.nordix.smsaccessor.R
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Tab
+import androidx.compose.material3.TabRow
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
@@ -30,6 +34,7 @@ import androidx.navigation.compose.rememberNavController
 import dev.nordix.smsaccessor.common_ui.ClientIcon
 import dev.nordix.smsaccessor.common_ui.NordixIconButton
 import dev.nordix.smsaccessor.domain.CustomerContact
+import dev.nordix.smsaccessor.presentation.calls.CallLog
 import dev.nordix.smsaccessor.presentation.contacts.ContactList
 import dev.nordix.smsaccessor.presentation.sms.SmsList
 
@@ -72,17 +77,59 @@ fun AppNavigation(
                 ContactList(onContactSelect = { contact ->
                     selectedContact = contact
                     navHostController.navigate(
-                        AppNavigationDirections.SmsList.getDestination(contact.phoneNumber)
+                        AppNavigationDirections.Logs.getDestination(contact.phoneNumber)
                     )
                 })
             }
 
             composable(
-                AppNavigationDirections.SmsList.route,
-                AppNavigationDirections.SmsList.argumentList
+                AppNavigationDirections.Logs.route,
+                AppNavigationDirections.Logs.argumentList
             ) { backStackEntry ->
-                val (selectedContactNumber) = AppNavigationDirections.SmsList.parseArguments(backStackEntry)
+                val (selectedContactNumber) = AppNavigationDirections.Logs.parseArguments(backStackEntry)
+                LogsLayout(selectedContactNumber)
+            }
+        }
+    }
+
+}
+
+@Composable
+private fun LogsLayout(
+    selectedContactNumber: String,
+) {
+    val tabs = remember {
+        listOf(
+            NavTabs.SmsLog,
+            NavTabs.CallLog,
+        )
+    }
+
+    var selectedTab by remember { mutableStateOf<NavTabs>(NavTabs.SmsLog) }
+    Column {
+        TabRow(
+            selectedTabIndex = tabs.indexOf(selectedTab),
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            tabs.forEach { tab ->
+                Tab(
+                    selected = tab == selectedTab,
+                    onClick = { selectedTab = tab }
+                ) {
+                    Text(
+                        text = stringResource(tab.titleResId),
+                        modifier = Modifier.padding(8.dp)
+                    )
+                }
+            }
+        }
+
+        when (selectedTab) {
+            NavTabs.SmsLog -> {
                 SmsList(phoneNumber = selectedContactNumber)
+            }
+            NavTabs.CallLog -> {
+                CallLog(phoneNumber = selectedContactNumber)
             }
         }
     }
@@ -108,14 +155,14 @@ private fun TopBar(
             currentRoute = destination.route
             titleResId = when (destination.route) {
                 AppNavigationDirections.ContactsList.route -> R.string.contacts
-                AppNavigationDirections.SmsList.route -> R.string.sms
+                AppNavigationDirections.Logs.route -> R.string.sms
                 else -> R.string.app_name
             }
         }
     })
 
     when (currentRoute) {
-        AppNavigationDirections.SmsList.route -> {
+        AppNavigationDirections.Logs.route -> {
             selectedContact?.let {
                 TopBarContactCard(selectedContact)
             } ?: run {

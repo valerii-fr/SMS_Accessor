@@ -38,7 +38,7 @@ fun ContactList(
 
     LazyColumn(
         modifier = modifier,
-        contentPadding = PaddingValues(4.dp),
+        contentPadding = PaddingValues(8.dp),
         state = listState
     ) {
         items(

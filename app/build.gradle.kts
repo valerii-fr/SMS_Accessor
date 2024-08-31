@@ -73,11 +73,13 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
+    implementation(libs.androidx.compose.extendedIcons)
 
     implementation(libs.hilt.android)
     implementation(libs.hilt.navigation.compose)
     implementation(libs.composeAnnotation)
     implementation(libs.accompanist.permissions)
+    implementation(libs.androidx.espresso.core)
 
     ksp(libs.hilt.compiler)
     ksp(libs.composeAnnotationProcessor)

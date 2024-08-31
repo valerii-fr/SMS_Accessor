@@ -1,4 +1,4 @@
-package dev.nordix.smsaccessor.presentation.sms
+package dev.nordix.smsaccessor.presentation.calls
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -6,10 +6,9 @@ import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject
 import dagger.hilt.android.lifecycle.HiltViewModel
-import dev.nordix.smsaccessor.component.SmsAccessor
-import dev.nordix.smsaccessor.domain.SmsItem
+import dev.nordix.smsaccessor.component.CallLogAccessor
+import dev.nordix.smsaccessor.domain.CallItem
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.flowOn
@@ -17,27 +16,26 @@ import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.mapLatest
 import kotlinx.coroutines.flow.update
 
-@OptIn(ExperimentalCoroutinesApi::class)
-@HiltViewModel(assistedFactory = SmsListViewModel.Factory::class)
-class SmsListViewModel @AssistedInject constructor(
-    private val smsAccessor: SmsAccessor,
+@HiltViewModel(assistedFactory = CallLogViewModel.Factory::class)
+class CallLogViewModel @AssistedInject constructor(
+    private val callLogAccessor: CallLogAccessor,
     @Assisted private val phoneNumber: String,
 ) : ViewModel() {
 
     @AssistedFactory
     interface Factory {
-        fun create(phoneNumber: String) : SmsListViewModel
+        fun create(phoneNumber: String) : CallLogViewModel
     }
 
-    val smsList: StateFlow<List<SmsItem>>
+    val callLog: StateFlow<List<CallItem>>
         field = MutableStateFlow(emptyList())
 
     private val selectedNumber = MutableStateFlow<String>(phoneNumber)
 
     init {
         selectedNumber.mapLatest { number ->
-            smsList.update {
-                smsAccessor.getSmsForNumber(number)
+            callLog.update {
+                callLogAccessor.getCallLogsForNumber(number)
             }
         }
             .flowOn(Dispatchers.IO)

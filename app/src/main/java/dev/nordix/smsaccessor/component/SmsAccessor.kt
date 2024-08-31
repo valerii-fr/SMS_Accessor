@@ -24,7 +24,7 @@ class SmsAccessor @Inject constructor(
             null,
             "${Telephony.Sms.ADDRESS} = ?",
             arrayOf(number),
-            "${Telephony.Sms.DATE} DESC" // Сортировка по дате
+            "${Telephony.Sms.DATE} DESC"
         )
 
         cursor?.use {
