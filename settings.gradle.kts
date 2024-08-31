@@ -23,3 +23,4 @@ dependencyResolutionManagement {
 rootProject.name = "SMS Accessor"
 include(":app")
 include(":common_ui")
+include(":component:accessors")

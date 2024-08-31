@@ -21,7 +21,6 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.surfaceColorAtElevation
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -29,7 +28,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import dev.nordix.smsaccessor.common_ui.helpers.DateTimeHelper.formatter
-import dev.nordix.smsaccessor.domain.SmsItem
+import dev.nordix.accessors.model.SmsItem
 import dev.nordix.smsaccessor.presentation.sms.SmsListDefaults.MaxWidth
 import dev.nordix.smsaccessor.presentation.sms.di.smsListViewModel
 import java.time.LocalDateTime

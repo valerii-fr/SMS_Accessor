@@ -1,4 +1,4 @@
-package dev.nordix.smsaccessor.domain
+package dev.nordix.accessors.model
 
 import android.provider.CallLog.Calls.INCOMING_TYPE
 import android.provider.CallLog.Calls.MISSED_TYPE

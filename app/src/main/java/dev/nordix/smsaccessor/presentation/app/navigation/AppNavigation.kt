@@ -33,7 +33,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import dev.nordix.smsaccessor.common_ui.ClientIcon
 import dev.nordix.smsaccessor.common_ui.NordixIconButton
-import dev.nordix.smsaccessor.domain.CustomerContact
+import dev.nordix.accessors.model.CustomerContact
 import dev.nordix.smsaccessor.presentation.calls.CallLog
 import dev.nordix.smsaccessor.presentation.contacts.ContactList
 import dev.nordix.smsaccessor.presentation.sms.SmsList

@@ -6,8 +6,8 @@ import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject
 import dagger.hilt.android.lifecycle.HiltViewModel
-import dev.nordix.smsaccessor.component.SmsAccessor
-import dev.nordix.smsaccessor.domain.SmsItem
+import dev.nordix.accessors.domain.SmsAccessor
+import dev.nordix.accessors.model.SmsItem
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableStateFlow

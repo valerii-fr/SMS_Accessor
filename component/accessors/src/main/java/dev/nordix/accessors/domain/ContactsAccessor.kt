@@ -1,14 +1,19 @@
-package dev.nordix.smsaccessor.component
+package dev.nordix.accessors.domain
 
 import android.content.Context
 import android.provider.ContactsContract
 import dagger.hilt.android.qualifiers.ApplicationContext
-import dev.nordix.smsaccessor.domain.CustomerContact
+import dev.nordix.accessors.model.CustomerContact
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
 import javax.inject.Inject
 import javax.inject.Singleton
+import kotlin.collections.distinctBy
+import kotlin.collections.sortedBy
+import kotlin.io.use
+import kotlin.text.replace
+import kotlin.text.toRegex
 
 @Singleton
 class ContactsAccessor @Inject constructor(

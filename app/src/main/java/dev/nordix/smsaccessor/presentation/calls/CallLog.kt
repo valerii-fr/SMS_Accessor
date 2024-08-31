@@ -35,7 +35,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import dev.nordix.smsaccessor.common_ui.helpers.DateTimeHelper.formatter
-import dev.nordix.smsaccessor.domain.CallItem
+import dev.nordix.accessors.model.CallItem
 import dev.nordix.smsaccessor.presentation.calls.di.callLogViewModel
 import dev.nordix.smsaccessor.presentation.sms.SmsListDefaults.MaxWidth
 import java.time.LocalDateTime

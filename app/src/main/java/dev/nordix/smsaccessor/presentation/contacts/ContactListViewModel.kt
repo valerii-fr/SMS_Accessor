@@ -2,8 +2,8 @@ package dev.nordix.smsaccessor.presentation.contacts
 
 import androidx.lifecycle.ViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
-import dev.nordix.smsaccessor.component.ContactsAccessor
-import dev.nordix.smsaccessor.domain.CustomerContact
+import dev.nordix.accessors.domain.ContactsAccessor
+import dev.nordix.accessors.model.CustomerContact
 import kotlinx.coroutines.flow.StateFlow
 import javax.inject.Inject
 

@@ -64,6 +64,7 @@ kotlin {
 
 dependencies {
     implementation(project(":common_ui"))
+    implementation(project(":component:accessors"))
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)

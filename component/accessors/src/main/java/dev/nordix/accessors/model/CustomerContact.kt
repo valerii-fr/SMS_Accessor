@@ -1,4 +1,4 @@
-package dev.nordix.smsaccessor.domain
+package dev.nordix.accessors.model
 
 data class CustomerContact(
     val id: String,

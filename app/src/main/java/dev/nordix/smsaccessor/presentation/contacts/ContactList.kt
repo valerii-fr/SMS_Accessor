@@ -25,7 +25,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.unit.dp
 import dev.nordix.smsaccessor.common_ui.ClientIcon
-import dev.nordix.smsaccessor.domain.CustomerContact
+import dev.nordix.accessors.model.CustomerContact
 
 @Composable
 fun ContactList(

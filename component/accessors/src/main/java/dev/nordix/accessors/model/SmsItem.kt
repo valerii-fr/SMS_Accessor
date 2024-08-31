@@ -1,4 +1,4 @@
-package dev.nordix.smsaccessor.domain
+package dev.nordix.accessors.model
 
 import android.provider.Telephony.TextBasedSmsColumns.MESSAGE_TYPE_INBOX
 import android.provider.Telephony.TextBasedSmsColumns.MESSAGE_TYPE_OUTBOX
