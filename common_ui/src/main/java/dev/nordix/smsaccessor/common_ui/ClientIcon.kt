@@ -42,7 +42,7 @@ fun ClientIcon(
     ) {
         Text(
             text = abbreviatedName,
-            style = textStyle,
+            style = textStyle.copy(fontSize = textStyle.fontSize * (size/IMAGE_SIZE)),
             textAlign = TextAlign.Center,
             color = MaterialTheme.colorScheme.onPrimary,
         )
