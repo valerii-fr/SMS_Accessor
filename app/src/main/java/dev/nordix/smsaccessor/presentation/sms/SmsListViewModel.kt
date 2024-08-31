@@ -1,17 +1,26 @@
 package dev.nordix.smsaccessor.presentation.sms
 
-import android.content.Context
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject
 import dagger.hilt.android.lifecycle.HiltViewModel
-import dagger.hilt.android.qualifiers.ApplicationContext
+import dev.nordix.smsaccessor.component.SmsAccessor
+import dev.nordix.smsaccessor.domain.SmsItem
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.flowOn
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.mapLatest
+import kotlinx.coroutines.flow.update
 
+@OptIn(ExperimentalCoroutinesApi::class)
 @HiltViewModel(assistedFactory = SmsListViewModel.Factory::class)
 class SmsListViewModel @AssistedInject constructor(
-    @ApplicationContext context: Context,
+    private val smsAccessor: SmsAccessor,
     @Assisted private val phoneNumber: String,
 ) : ViewModel() {
 
@@ -20,7 +29,20 @@ class SmsListViewModel @AssistedInject constructor(
         fun create(phoneNumber: String) : SmsListViewModel
     }
 
-    private val selectedNumber = MutableStateFlow<String?>(null)
+    val smsList: StateFlow<List<SmsItem>>
+        field = MutableStateFlow(emptyList())
+
+    private val selectedNumber = MutableStateFlow<String>(phoneNumber)
+
+    init {
+        selectedNumber.mapLatest { number ->
+            smsList.update {
+                smsAccessor.getSmsForNumber(number)
+            }
+        }
+            .flowOn(Dispatchers.IO)
+            .launchIn(viewModelScope)
+    }
 
     fun setNumber(number: String) {
         selectedNumber.value = number
