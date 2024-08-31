@@ -2,17 +2,19 @@ package dev.nordix.accessors.domain
 
 import android.content.Context
 import android.provider.CallLog
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dev.nordix.accessors.model.CallItem
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import java.time.Instant
+import javax.inject.Inject
 import kotlin.collections.forEach
 import kotlin.io.use
 import kotlin.time.*
 import kotlin.time.toDuration
 
-class CallLogAccessor @javax.inject.Inject constructor(
-    @dagger.hilt.android.qualifiers.ApplicationContext context: Context
+class CallLogAccessor @Inject constructor(
+    @ApplicationContext context: Context
 ) {
 
     val contentResolver = context.contentResolver

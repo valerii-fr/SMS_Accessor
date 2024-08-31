@@ -3,14 +3,17 @@ package dev.nordix.accessors.domain
 import android.content.Context
 import android.provider.Telephony
 import android.util.Log
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dev.nordix.accessors.model.SmsItem
 import java.time.Instant
+import javax.inject.Inject
+import javax.inject.Singleton
 import kotlin.collections.joinToString
 import kotlin.io.use
 
-@javax.inject.Singleton
-class SmsAccessor @javax.inject.Inject constructor(
-    @dagger.hilt.android.qualifiers.ApplicationContext context: Context
+@Singleton
+class SmsAccessor @Inject constructor(
+    @ApplicationContext context: Context
 ) {
     val contentResolver = context.contentResolver
 
